@@ -23,8 +23,11 @@
 ==================================================*/
 
 #programs {
-  padding: 100px 0;
   background: #f3f3f3
+}
+
+#programs h4 {
+  color: rgb(33, 83, 48);
 }
 
 .programs-row {
