@@ -9,6 +9,36 @@
   font-family: 'Scriptina', sans-serif;
 }
 
+h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 700;
+}
+
+.f-wedding-long {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: x-large;
+}
+
+.location-list {
+  list-style: none;
+}
+
+.location-list li::before {
+  content: "\25C6";
+  /* Add content: \2022 is the CSS Code/unicode for a bullet */
+  color: rgb(33, 83, 48);
+  /* Change the color */
+  font-weight: bold;
+  font-size: initial;
+  /* If you want it to be bold */
+  display: inline-block;
+  /* Needed to add space between the bullet and the text */
+  width: 1.5em;
+  /* Also needed for space (tweak if needed) */
+  margin-left: -1em;
+  /* Also needed for space (tweak if needed) */
+}
+
 .color-wedding {
   color: rgb(250, 235, 215);
 }
