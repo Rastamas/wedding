@@ -6,6 +6,11 @@ project.lock.json
 .DS_Store
 *.pyc
 
+# Secrets
+*.secrets
+*.csv
+*.tsv
+
 # Visual Studio Code
 .vscode
 
