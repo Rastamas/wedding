@@ -79,14 +79,12 @@ h1 {
   font-weight: 700;
 }
 
+/* Hover images */
+
 .hover-title {
   display: inline;
   pointer-events: auto;
   cursor: pointer;
-}
-
-.hover-image {
-  visibility: hidden;
 }
 
 body:not(.mobile) .hover-title:hover+.hover-image {
@@ -95,6 +93,7 @@ body:not(.mobile) .hover-title:hover+.hover-image {
 }
 
 .hover-image {
+  visibility: hidden;
   display: flex;
   position: fixed;
   top: 50%;
@@ -109,6 +108,18 @@ body:not(.mobile) .hover-title:hover+.hover-image {
   /* Change width and height to scale images */
   width: 45vw;
   height: 45vh;
+}
+
+/* hide on mobile */
+@media screen and (max-width: 600px) {
+  .hover-image {
+    visibility: hidden;
+    clear: both;
+    float: left;
+    margin: 10px auto 5px 20px;
+    width: 28%;
+    display: none;
+  }
 }
 
 .hover-image img {
