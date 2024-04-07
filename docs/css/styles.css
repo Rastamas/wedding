@@ -47,6 +47,78 @@ h1 {
   font-size: 5rem;
 }
 
+
+/* FAQ */
+
+.question-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  margin: 0.5rem 0;
+  font-size: xx-large;
+}
+
+.question {
+  color: var(--very-dark-grayish-blue);
+  padding-top: 0.5rem;
+}
+
+.question:hover {
+  color: var(--soft-red);
+  cursor: pointer;
+}
+
+.bold {
+  font-weight: 700;
+}
+
+.hover-title {
+  display: inline;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.hover-image {
+  visibility: hidden;
+}
+
+body:not(.mobile) .hover-title:hover+.hover-image {
+  visibility: visible;
+  pointer-events: none;
+}
+
+.hover-image {
+  display: flex;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+  pointer-events: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  /* Change width and height to scale images */
+  width: 45vw;
+  height: 45vh;
+}
+
+.hover-image img {
+  max-width: 100% !important;
+  max-height: 100% !important;
+  width: auto !important;
+  height: auto !important;
+  margin-bottom: 0;
+}
+
 /* Timeline */
 
 /* programs section
