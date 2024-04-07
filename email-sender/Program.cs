@@ -26,21 +26,21 @@ namespace TestClient
             var secrets = await File.ReadAllLinesAsync(".secrets");
             var password = secrets[0];
             FromEmail = secrets[1];
-            var formsLink = secrets[2];
+            var facebokEventLink = secrets[2];
             var website = secrets[3];
 
-            var emailTemplate = await File.ReadAllTextAsync("email_template.html");
+            var emailTemplate = await File.ReadAllTextAsync("faq_email_template.html");
 
             using var smtpClient = new SmtpClient();
 
             await smtpClient.ConnectAsync("smtp.gmail.com", 587, false);
             await smtpClient.AuthenticateAsync(FromEmail, password);
 
-            var csvLines = await File.ReadAllLinesAsync("eskuvo_vendegek.tsv");
+            var csvLines = await File.ReadAllLinesAsync("eskuvo_vendegek3.tsv");
 
             var number = 0;
 
-            System.Console.WriteLine($"Password: {password}, from email: {FromEmail}, forms link: {formsLink}");
+            System.Console.WriteLine($"Password: {password}, from email: {FromEmail}, forms link: {facebokEventLink}");
 
             foreach (var line in csvLines.Skip(1))
             {
@@ -56,33 +56,31 @@ namespace TestClient
                 Console.WriteLine($"Sending email #{++number} to {toName} to email {toEmail}");
                 if (!dryRun)
                 {
-                    await SendEmail(smtpClient, toEmail, toName, emailTemplate, formsLink, website);
+                    await SendEmail(smtpClient, toEmail, toName, emailTemplate, facebokEventLink, website);
                 }
             }
 
             await smtpClient.DisconnectAsync(true);
         }
 
-        private static async Task SendEmail(SmtpClient smtpClient, string toEmail, string toName, string template, string formsLink, string website)
+        private static async Task SendEmail(SmtpClient smtpClient, string toEmail, string toName, string template, string facebokEventLink, string website)
         {
             var email = new MimeMessage();
 
             email.From.Add(new MailboxAddress("Zsófi és Tomi", FromEmail));
             email.To.Add(new MailboxAddress(toEmail, toEmail));
 
-            email.Subject = "Zsófi és Tomi esküvői meghívó";
+            email.Subject = "Zsófi és Tomi esküvői információk";
 
             var builder = new BodyBuilder();
-            var image = builder.LinkedResources.Add("meghivo.png");
-            image.ContentId = MimeUtils.GenerateMessageId();
 
             builder.HtmlBody = string.Format(template,
                 toName,
-                image.ContentId,
-                toName.Contains(" és ") ? "jelezzetek" : "jelezz",
-                toName.Contains(" és ") ? "találtok" : "találsz",
-                formsLink,
-                website);
+                website,
+                facebokEventLink,
+                toName.Contains(" és ") ? "kérdésetek" : "kérdésed",
+                toName.Contains(" és ") ? "írhattok" : "írhatsz"
+                );
 
             email.Body = builder.ToMessageBody();
 
